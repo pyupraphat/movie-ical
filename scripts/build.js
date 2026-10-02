@@ -149,7 +149,8 @@ function buildICS(movies) {
     const end = endDate.toISOString().slice(0,10).replace(/-/g,'');
     const uid = `movie-${start}-${i}@lostathome-movie-ical`;
     const summary = m.title.replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,');
-    lines.push('BEGIN:VEVENT',`UID:${uid}`,`DTSTAMP:${stamp}`,`DTSTART;VALUE=DATE:${start}`,`DTEND;VALUE=DATE:${end}`,`SUMMARY:${summary}`,'END:VEVENT');
+    const trailerUrl = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(m.title + ' trailer');
+    lines.push('BEGIN:VEVENT',`UID:${uid}`,`DTSTAMP:${stamp}`,`DTSTART;VALUE=DATE:${start}`,`DTEND;VALUE=DATE:${end}`,`SUMMARY:${summary}`,`URL:${trailerUrl}`,'END:VEVENT');
   });
   lines.push('END:VCALENDAR');
   return lines.join('\r\n');
